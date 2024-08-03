@@ -14,6 +14,12 @@
         <div class="collection">
           {% for choice in question.choice_set.all %}
           <div class="collection-item">
+            {% if answer %}
+              {{ choice.content }}
+              {% if answer.choice.id == choice.id %}
+                <i class="material-icons">check</i>
+              {% endif %}
+            {% else %}
             <label>
               <input
                 class="with-gap"
@@ -23,17 +29,22 @@
               />
               <span>{{ choice.content }}</span>
             </label>
+            {% endif %}
           </div>
           {% endfor %}
         </div>
       </div>
     </div>
+
+
+    {% if answer %}
     <div class="row">
       <button class="btn waves-effect waves-light" type="submit" name="action">
         Submit
         <i class="material-icons right">send</i>
       </button>
     </div>
+    {% endif %}
 
     <div class="row">
         <p class="red">
